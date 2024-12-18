@@ -1,12 +1,14 @@
 # gg2-uga
 
-This template should help get you started developing with Vue 3 in Vite.
+This is a Vue 3 project in Vite. Guild Wars 2 - Unoffical Game App is a learning project and may not ever be fully realized.
 
 ## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+[VSCode](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur & Volar).
 
 ## Type Support for `.vue` Imports in TS
+
+### Volar has been deprecated. Vue - Official has taken its place
 
 TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
 
