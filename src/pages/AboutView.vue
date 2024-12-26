@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <main>
     <h1>About this site</h1>
     <p>
       I created this site as a place to work on my coding skills and thought it would be fun to work with Guild Wars 2
@@ -19,7 +19,7 @@
         those keys.
       </li>
     </ul>
-  </div>
+  </main>
 </template>
 
 <style>
