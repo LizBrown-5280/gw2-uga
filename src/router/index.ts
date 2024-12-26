@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../pages/HomeView.vue'
+import GW2HomeView from '../pages/GW2HomeView.vue'
+import { WalletComponent, InventoriesComponent } from '../components/gw2/containers'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,14 +14,23 @@ const router = createRouter({
     {
       path: '/gw2Home',
       name: 'gw2Home',
-      component: () => import('../pages/GW2HomeView.vue'),
+      component: GW2HomeView,
+      children: [
+        {
+          path: 'wallet',
+          name: 'wallet',
+          component: WalletComponent,
+        },
+        {
+          path: 'inventories',
+          name: 'inventories',
+          component: InventoriesComponent,
+        },
+      ],
     },
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../pages/AboutView.vue'),
     },
   ],
