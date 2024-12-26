@@ -10,6 +10,11 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: '/gw2Home',
+      name: 'gw2Home',
+      component: () => import('../pages/GW2HomeView.vue'),
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting

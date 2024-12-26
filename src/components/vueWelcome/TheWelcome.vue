@@ -1,4 +1,7 @@
 <template>
+  <p :style="{ color: 'salmon', fontSize: '18px' }">
+    Keep a while longer, might would like to use the component model syntax later on.
+  </p>
   <WelcomeItem>
     <template #icon>
       <DocumentationIcon />
@@ -75,10 +78,10 @@
 </template>
 
 <script setup lang="ts">
-import WelcomeItem from './WelcomeItem.vue'
-import DocumentationIcon from './icons/IconDocumentation.vue'
-import ToolingIcon from './icons/IconTooling.vue'
-import EcosystemIcon from './icons/IconEcosystem.vue'
-import CommunityIcon from './icons/IconCommunity.vue'
-import SupportIcon from './icons/IconSupport.vue'
+import WelcomeItem from '../vueWelcome/WelcomeItem.vue'
+import DocumentationIcon from '../icons/IconDocumentation.vue'
+import ToolingIcon from '../icons/IconTooling.vue'
+import EcosystemIcon from '../icons/IconEcosystem.vue'
+import CommunityIcon from '../icons/IconCommunity.vue'
+import SupportIcon from '../icons/IconSupport.vue'
 </script>
