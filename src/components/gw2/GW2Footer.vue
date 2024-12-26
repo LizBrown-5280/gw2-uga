@@ -2,16 +2,16 @@
   <footer>
     <div class="gw2Logos">
       <a href="https://www.arena.net/en">
-        <img src="@/assets/gw2/ArenaNet_LogoFrgb_Sm250.jpg" width="140" />
+        <img src="@/assets/gw2/images/ArenaNet_LogoFrgb_Sm250.jpg" width="140" />
       </a>
       <a href="https://www.guildwars2.com/en/">
-        <img src="@/assets/gw2/GW2_Logo.png" width="140" />
+        <img src="@/assets/gw2/images/GW2_Logo.png" width="140" />
       </a>
       <a href="https://heartofthorns.guildwars2.com/">
-        <img src="@/assets/gw2/GW2-HoT_Texture_Centered_Trans_R.png" width="140" />
+        <img src="@/assets/gw2/images/GW2-HoT_Texture_Centered_Trans_R.png" width="140" />
       </a>
       <a href="https://www.guildwars2.com/en/path-of-fire/">
-        <img src="@/assets/gw2/GW2-PoF_Texture_Centered_Trans.png" width="140" />
+        <img src="@/assets/gw2/images/GW2-PoF_Texture_Centered_Trans.png" width="140" />
       </a>
     </div>
 
