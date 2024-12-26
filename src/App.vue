@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="wrapper">
-      <nav>
+      <nav role="navigation">
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/gw2Home">Guild Wars 2</RouterLink>
         <RouterLink to="/about">About</RouterLink>
@@ -48,12 +48,6 @@ nav a:first-of-type {
 }
 
 @media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
   header .wrapper {
     display: flex;
     place-items: flex-start;
