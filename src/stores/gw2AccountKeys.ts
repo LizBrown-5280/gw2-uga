@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
-import type { IGw2AccountKey } from '@/types/Gw2Types.ts'
+import type { IGw2AccountKey } from '@/interfaces/Gw2Interfaces'
 import { useGw2AccountKeys } from '@/composables/useGw2AccountKeys'
 
 export const useGw2AccountKeysStore = defineStore('gw2AccountKeys', {
   state: () => ({
     gw2AccountKeys: [] as IGw2AccountKey[],
+    selectedAccountKey: '',
   }),
   actions: {
     addAccountKey(newKey: IGw2AccountKey) {
@@ -12,15 +13,16 @@ export const useGw2AccountKeysStore = defineStore('gw2AccountKeys', {
         newKey.selected = true
       }
       this.gw2AccountKeys.push(newKey)
-      const { saveAccountKeys, gw2AccountKeys } = useGw2AccountKeys()
-      gw2AccountKeys.value = this.gw2AccountKeys
-      saveAccountKeys()
+      this.updateAndSaveAccountKeysToLocal()
     },
     removeAccountKey(key: string) {
       this.gw2AccountKeys = this.gw2AccountKeys.filter((accountKey) => accountKey.key !== key)
-      const { saveAccountKeys, gw2AccountKeys } = useGw2AccountKeys()
-      gw2AccountKeys.value = this.gw2AccountKeys
-      saveAccountKeys()
+      const hasSelectedKey = this.gw2AccountKeys.some((accountKey) => accountKey.selected)
+      if (!hasSelectedKey) {
+        this.setAutoDefaultKey()
+      } else {
+        this.updateAndSaveAccountKeysToLocal()
+      }
     },
     loadAccountKeys() {
       const { loadAccountKeys, gw2AccountKeys } = useGw2AccountKeys()
@@ -30,10 +32,25 @@ export const useGw2AccountKeysStore = defineStore('gw2AccountKeys', {
     isDuplicateKey(key: string): boolean {
       return this.gw2AccountKeys.some((accountKey) => accountKey.key === key)
     },
-    setDefaultKey(key: string) {
+    setUserDefaultKey(key: string) {
+      this.selectedAccountKey = ''
       this.gw2AccountKeys.forEach((accountKey) => {
         accountKey.selected = accountKey.key === key
+        if (accountKey.selected) {
+          this.selectedAccountKey = key
+        }
       })
+      this.updateAndSaveAccountKeysToLocal()
+    },
+    setAutoDefaultKey() {
+      this.selectedAccountKey = ''
+      if (this.gw2AccountKeys.length > 0) {
+        this.gw2AccountKeys[0].selected = true
+        this.selectedAccountKey = this.gw2AccountKeys[0].key
+      }
+      this.updateAndSaveAccountKeysToLocal()
+    },
+    updateAndSaveAccountKeysToLocal() {
       const { saveAccountKeys, gw2AccountKeys } = useGw2AccountKeys()
       gw2AccountKeys.value = this.gw2AccountKeys
       saveAccountKeys()
