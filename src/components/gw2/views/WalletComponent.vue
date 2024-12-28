@@ -1,7 +1,7 @@
 <template>
-  <div id="wallet">
+  <section>
     <h2>All {{ mergedData.length - 1 }} Currencies</h2>
-    <ul v-if="!loading">
+    <ul class="no-bullets" v-if="!loading">
       <li v-for="currency in mergedData" :key="currency.id">
         <template v-if="isSpecialCurrency(currency)">
           <div class="col col1 img-lg">
@@ -34,7 +34,7 @@
     </ul>
     <p v-if="loading">Loading...</p>
     <p v-if="error">{{ error.message }}</p>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">

@@ -45,7 +45,7 @@ const removeKey = () => {
 <template>
   <section v-if="accountKeys.length">
     <h3>Select Default GW2 Account Key</h3>
-    <ul class="sm-txt">
+    <ul class="sm-txt no-bullets">
       <li v-for="key in accountKeys" :key="key.key">
         <input type="radio" :id="key.key" :value="key.key" v-model="selectedKey" @change="setDefaultKey(key.key)" />
         <label>{{ key.name }}: {{ key.key }}</label>

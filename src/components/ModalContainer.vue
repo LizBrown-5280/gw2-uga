@@ -36,7 +36,7 @@ const close = () => {
 }
 .modal-container {
   position: relative;
-  background: white;
+  background: var(--color-background-sand);
   padding: 30px 20px 20px;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
