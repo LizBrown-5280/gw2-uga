@@ -1,6 +1,6 @@
 <template>
   <teleport to="body">
-    <div v-if="isVisible" class="modal-overlay" @click.self="close">
+    <div v-if="isVisible" id="modal" class="modal-overlay" @click.self="close">
       <div class="modal-container">
         <button class="close" @click="close"><IconClose /></button>
         <slot />
