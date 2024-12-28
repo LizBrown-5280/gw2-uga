@@ -20,7 +20,6 @@ header {
   max-width: 1020px;
   padding: 15px 15px;
   font-size: 11px;
-  color: white;
   display: flex;
   justify-content: space-between;
 

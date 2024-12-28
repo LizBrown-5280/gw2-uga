@@ -16,10 +16,9 @@
     </div>
 
     <p>
-      &copy; 2015 ArenaNet, LLC. All rights reserved. NCSOFT, the interlocking NC logo, ArenaNet, Guild Wars, Guild Wars
-      Factions, Guild Wars Nightfall, Guild Wars: Eye of the North, Guild Wars 2, Heart of Thorns, and all associated
-      logos and designs are trademarks or registered trademarks of NCSOFT Corporation. All other trademarks are the
-      property of their respective owners.
+      &copy; 2015 ArenaNet, LLC. All rights reserved. NCSOFT, the interlocking NC logo, ArenaNet, Guild Wars, Guild Wars Factions,
+      Guild Wars Nightfall, Guild Wars: Eye of the North, Guild Wars 2, Heart of Thorns, and all associated logos and designs are
+      trademarks or registered trademarks of NCSOFT Corporation. All other trademarks are the property of their respective owners.
     </p>
   </footer>
 </template>
@@ -35,7 +34,6 @@ footer {
   border-top-right-radius: 10px;
   text-align: center;
   font-size: 11px;
-  color: white;
 }
 
 .gw2Logos {
@@ -45,7 +43,7 @@ footer {
   width: 580px;
   height: 115px;
   margin: 0 auto 10px;
-  background-color: white;
+  background-color: var(--color-background-sand);
   border-radius: 5px;
 }
 </style>

@@ -63,8 +63,8 @@ const limitNameLength = () => {
     <button @click="addKey">Use key & save</button>
     <!-- <button @click="useOnlyKey">Use key, but don't save</button> -->
     <p class="sm-txt">
-      Saving the key will store it in your browser's local storage, allowing you to access it without needing to enter
-      it again next time.
+      Saving the key will store it in your browser's local storage, allowing you to access it without needing to enter it again
+      next time.
     </p>
   </section>
 </template>
@@ -72,7 +72,7 @@ const limitNameLength = () => {
 <style scoped lang="scss">
 .modal-content {
   position: relative;
-  background: white;
+  background: var(--color-background-sand);
   width: 650px;
   color: var(--vt-c-text-light-2);
   text-align: center;
