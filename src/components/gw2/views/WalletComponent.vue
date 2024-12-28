@@ -53,7 +53,7 @@ const selectedAccountKey = computed(() => store.selectedAccountKey)
 
 // Combined loading and error states
 const loading = computed(() => currenciesLoading.value || walletLoading.value)
-const error = computed(() => currenciesError.value || walletError.value)
+const error = computed<Error | null>(() => currenciesError.value || walletError.value)
 
 // Fetch data on component mount
 onMounted(async () => {
