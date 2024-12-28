@@ -10,9 +10,7 @@
   </main>
 </template>
 
-<script lang="ts">
-export default {}
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss">
 main {
@@ -24,13 +22,12 @@ main {
   text-align: center;
   font-size: 11px;
   color: white;
-  background-color: dimgray;
   display: flex;
 
   nav {
     width: 100px;
     height: 800px;
-    background-color: #cbc1ae;
+    background-color: var(--color-background-sand);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 
@@ -44,9 +41,12 @@ main {
   }
 
   section {
+    color: var(--gw2-c-sand);
     width: 920px;
     height: 800px;
-    background-color: #141414;
+    overflow-x: hidden;
+    padding: 10px 15px;
+    background-color: var(--color-background-soft);
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
   }
