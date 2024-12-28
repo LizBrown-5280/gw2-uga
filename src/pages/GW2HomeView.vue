@@ -1,7 +1,9 @@
 <template>
-  <Header />
-  <Main />
-  <Footer />
+  <main id="GuildWars2">
+    <Header />
+    <Main />
+    <Footer />
+  </main>
 </template>
 
 <script setup lang="ts">
