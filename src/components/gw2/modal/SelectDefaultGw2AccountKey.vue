@@ -8,7 +8,6 @@ import ModalContainer from '@/components/ModalContainer.vue'
 const store = useGw2AccountKeysStore()
 
 onMounted(() => {
-  console.log('SelectDefaultGw2AccountKey mounted')
   store.loadAccountKeys()
 })
 
@@ -26,7 +25,7 @@ watch(accountKeys, (newKeys) => {
 })
 
 const setDefaultKey = (key: string) => {
-  store.setDefaultKey(key)
+  store.setUserDefaultKey(key)
 }
 
 const confirmRemoveKey = (key: string) => {
@@ -73,10 +72,6 @@ input[type='radio'] {
   margin-right: 5px;
 }
 ul {
-  list-style-type: none;
-  text-align: left;
-  padding: 0px;
-
   li {
     display: flex;
     margin-bottom: 8px;

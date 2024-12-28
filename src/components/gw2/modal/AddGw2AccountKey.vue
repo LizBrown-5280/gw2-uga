@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useGw2AccountKeysStore } from '@/stores/gw2AccountKeys'
-import type { IGw2AccountKey } from '@/types/Gw2Types.ts'
+import type { IGw2AccountKey } from '@/interfaces/Gw2Interfaces'
 
 const store = useGw2AccountKeysStore()
 
@@ -102,9 +102,6 @@ input {
 }
 button {
   margin: 5px 5px 15px;
-}
-ul {
-  list-style-type: none;
 }
 .width-auto-centered {
   display: block;
