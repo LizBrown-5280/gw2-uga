@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../pages/HomeView.vue'
 import GW2HomeView from '../pages/GW2HomeView.vue'
-import { WalletComponent, InventoriesComponent } from '../components/gw2/containers'
+import { WalletComponent, InventoriesComponent } from '../components/gw2/views'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
