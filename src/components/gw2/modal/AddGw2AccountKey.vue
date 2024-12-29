@@ -9,10 +9,11 @@
         v-model="newKey.key"
         type="text"
         placeholder="########-####-####-####-####################-####-####-####-############"
+        @change="handleKeyValidation"
       />
       <div class="error-container">
         <p v-if="isInvalidKey" class="sm-txt">The key provided is invalid.</p>
-        <p v-if="isDuplicateKey" class="sm-txt">The key provided is a duplicate.</p>
+        <p v-if="isDuplicateKey" class="sm-txt">The key provided is already stored. Please provide another key.</p>
       </div>
     </div>
 
@@ -25,9 +26,11 @@
         @input="limitNameLength"
         type="text"
         placeholder="Account Key Name"
+        @change="handleIsButtonEnabled"
       />
     </div>
-    <button @click="addKey">Use key & save</button>
+
+    <button @click="addKey" :disabled="isDisabled">Use key & save</button>
     <!-- <button @click="useOnlyKey">Use key, but don't save</button> -->
     <p class="sm-txt">
       Saving the key will store it in your browser's local storage, allowing you to access it without needing to enter it again
@@ -50,16 +53,26 @@ const newKey = ref<IGw2AccountKey>({
 
 const isInvalidKey = ref(false)
 const isDuplicateKey = ref(false)
+const isDisabled = ref(true)
+
+const handleKeyValidation = () => {
+  isDuplicateKey.value = store.isDuplicateKey(newKey.value.key)
+  isInvalidKey.value = store.isInvalidKey(newKey.value.key)
+
+  // Also check if the save button should be enabled
+  handleIsButtonEnabled()
+}
+
+const handleIsButtonEnabled = () => {
+  isDisabled.value = isInvalidKey.value || isDuplicateKey.value || newKey.value.name.length <= 0 || newKey.value.key.length <= 0
+}
 
 const addKey = () => {
-  isDuplicateKey.value = store.isDuplicateKey(newKey.value.key)
-  if (isDuplicateKey.value) {
-    console.error('Duplicate key:', newKey.value.key)
-    return
-  }
-
   store.addAccountKey(newKey.value)
-  newKey.value = { name: '', key: '' } // Reset the input fields
+
+  // Reset the input fields
+  newKey.value = { name: '', key: '' }
+  isDisabled.value = true
 }
 
 const limitNameLength = () => {
@@ -72,7 +85,7 @@ const limitNameLength = () => {
 <style scoped lang="scss">
 .modal-content {
   position: relative;
-  background: var(--color-background-sand);
+  background: white;
   width: 650px;
   color: var(--vt-c-text-light-2);
   text-align: center;
