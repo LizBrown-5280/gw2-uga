@@ -39,51 +39,41 @@
 
 <script setup lang="ts">
 import { onMounted, computed } from 'vue'
-import { useApi } from '@/composables/useApi'
+import { useGw2WalletStore } from '@/stores/gw2WalletStore'
 import { useGw2AccountKeysStore } from '@/stores/gw2AccountKeys'
 import type { IGw2Wallet } from '@/interfaces/Gw2Interfaces'
 
-// API data and loading/error states
-const { data: currenciesData, error: currenciesError, loading: currenciesLoading, fetchData: fetchCurrencies } = useApi()
-const { data: walletData, error: walletError, loading: walletLoading, fetchData: fetchWallet } = useApi()
-
 // Store and selected account key
-const store = useGw2AccountKeysStore()
-const selectedAccountKey = computed(() => store.selectedAccountKey)
+const walletStore = useGw2WalletStore()
+const accountKeysStore = useGw2AccountKeysStore()
+const selectedAccountKey = computed(() => accountKeysStore.selectedAccountKey)
 
 // Combined loading and error states
-const loading = computed(() => currenciesLoading.value || walletLoading.value)
-const error = computed<Error | null>(() => currenciesError.value || walletError.value)
+const loading = computed(() => walletStore.loading)
+const error = computed(() => walletStore.error)
 
 // Fetch data on component mount
 onMounted(async () => {
-  try {
-    await Promise.all([
-      fetchCurrencies('/v2/currencies?ids=all'),
-      fetchWallet(`/v2/account/wallet?access_token=${selectedAccountKey.value}`),
-    ])
-  } catch (err) {
-    console.error(err)
-  }
+  await walletStore.fetchAllData(selectedAccountKey.value)
 })
 
+// Computed property to merge and sort data
 const mergedData = computed(() => {
-  if (currenciesData.value) {
-    const walletMap = walletData.value ? new Map(walletData.value.map((item) => [item.id, item])) : new Map()
-
-    return (currenciesData.value as IGw2Wallet[])
+  if (walletStore.currenciesData) {
+    const walletMap = walletStore.walletData ? new Map(walletStore.walletData.map((item) => [item.id, item])) : new Map()
+    return (walletStore.currenciesData as IGw2Wallet[])
       .map((currency) => {
         const walletItem = walletMap.get(currency.id)
         return walletItem ? { ...currency, value: walletItem.value } : currency
       })
-      .filter((currency) => currency.id !== 74) // Filter out currency with id 74, a duplicate of another
+      .filter((currency) => currency.id !== 74) // Filter out currency with id 74, a duplicate of 68
       .sort((a, b) => a.order - b.order)
   }
   return []
 })
 
 const isWalletData = computed(() => {
-  return walletData.value ? true : false
+  return walletStore.walletData ? true : false
 })
 
 // Helper methods
