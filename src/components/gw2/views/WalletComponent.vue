@@ -40,7 +40,7 @@
 <script setup lang="ts">
 import { onMounted, computed } from 'vue'
 import { useGw2WalletStore } from '@/stores/gw2WalletStore'
-import { useGw2AccountKeysStore } from '@/stores/gw2AccountKeys'
+import { useGw2AccountKeysStore } from '@/stores/gw2AccountKeysStore'
 import type { IGw2Wallet } from '@/interfaces/Gw2Interfaces'
 
 // Store and selected account key

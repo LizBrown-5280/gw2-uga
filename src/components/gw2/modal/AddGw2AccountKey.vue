@@ -9,7 +9,6 @@
         v-model="newKey.key"
         type="text"
         placeholder="########-####-####-####-####################-####-####-####-############"
-        @change="handleKeyValidation"
       />
       <div class="error-container">
         <p v-if="isInvalidKey" class="sm-txt">The key provided is invalid.</p>
@@ -40,8 +39,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useGw2AccountKeysStore } from '@/stores/gw2AccountKeys'
+import { ref, watch } from 'vue'
+import { useGw2AccountKeysStore } from '@/stores/gw2AccountKeysStore'
 import type { IGw2AccountKey } from '@/interfaces/Gw2Interfaces'
 
 const store = useGw2AccountKeysStore()
@@ -54,6 +53,13 @@ const newKey = ref<IGw2AccountKey>({
 const isInvalidKey = ref(false)
 const isDuplicateKey = ref(false)
 const isDisabled = ref(true)
+
+watch(
+  () => newKey.value.key,
+  () => {
+    handleKeyValidation()
+  },
+)
 
 const handleKeyValidation = () => {
   isDuplicateKey.value = store.isDuplicateKey(newKey.value.key)

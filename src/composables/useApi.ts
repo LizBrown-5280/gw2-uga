@@ -5,6 +5,7 @@ import type { IGw2Wallet } from '@/interfaces/Gw2Interfaces'
 axios.defaults.baseURL = 'https://api.guildwars2.com'
 
 export function useApi() {
+  console.log('***** using API - fetch data')
   const data = ref<IGw2Wallet[] | null>(null)
   const error = ref(null)
   const loading = ref(false)
