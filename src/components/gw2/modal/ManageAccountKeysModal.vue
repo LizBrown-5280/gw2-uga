@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import ModalContainer from '../../ModalContainer.vue'
-import SelectKey from './SelectDefaultGw2AccountKey.vue'
+import SelectKey from './SelectGw2AccountKey.vue'
 import AddKey from './AddGw2AccountKey.vue'
 </script>
 

@@ -11,7 +11,7 @@ export const useGw2WalletStore = defineStore('gw2WalletData', () => {
   const fetchAllData = async (accessToken: string) => {
     loading.value = true
     error.value = null
-    console.log('fetching data')
+
     try {
       if (accessToken) {
         await Promise.all([

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import type { IGw2AccountKey } from '@/interfaces/Gw2Interfaces'
-import { useGw2AccountKeys } from '@/composables/useGw2AccountKeys'
+import { useGw2AccountKeys } from '@/composables/useGw2AccountKeysStorage'
 
 export const useGw2AccountKeysStore = defineStore('gw2AccountKeys', {
   state: () => ({
@@ -9,6 +9,7 @@ export const useGw2AccountKeysStore = defineStore('gw2AccountKeys', {
   }),
   actions: {
     addAccountKey(newKey: IGw2AccountKey) {
+      // If there are no keys, set the new key as selected key
       if (this.gw2AccountKeys.length === 0) {
         newKey.selected = true
       }
@@ -31,6 +32,10 @@ export const useGw2AccountKeysStore = defineStore('gw2AccountKeys', {
     },
     isDuplicateKey(key: string): boolean {
       return this.gw2AccountKeys.some((accountKey) => accountKey.key === key)
+    },
+    isInvalidKey(key: string): boolean {
+      //! Needs to be built out to check if the key is valid, template is ready
+      return false
     },
     setUserDefaultKey(key: string) {
       this.selectedAccountKey = ''
