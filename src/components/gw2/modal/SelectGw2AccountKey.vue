@@ -3,7 +3,7 @@
     <h3>Select Default GW2 Account Key</h3>
     <ul class="sm-txt no-bullets">
       <li v-for="key in accountKeys" :key="key.key">
-        <input type="radio" :id="key.key" :value="key.key" v-model="selectedKey" @change="setDefaultKey(key.key)" />
+        <input type="radio" :id="key.key" :value="key.key" v-model="selectedKey" />
         <label>{{ key.name }}: {{ key.key }}</label>
         <button @click="confirmRemoveKey(key.key)"><IconCross /></button>
         <span class="icon-wrapper" v-show="isValidKey"><IconCheck /></span>
@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
-import { useGw2AccountKeysStore } from '@/stores/gw2AccountKeys'
+import { useGw2AccountKeysStore } from '@/stores/gw2AccountKeysStore'
 import IconCheck from '../icons/IconCheckGreenCircle.vue'
 import IconCross from '../icons/IconCrossRedCircle.vue'
 import ModalContainer from '@/components/ModalContainer.vue'
@@ -39,16 +39,26 @@ const selectedKey = ref<string>('')
 const showModal = ref(false)
 const keyToRemove = ref<string>('')
 
-//! Not sure if this is watcher is working as intended,
-// 1.) it should update the selected key when the very first key is added
-// 2.) it should update the selected key when a key is removed
-watch(accountKeys, (newKeys) => {
-  selectedKey.value = newKeys.find((key) => key.selected)?.key || ''
-})
-
-const setDefaultKey = (key: string) => {
-  store.setUserDefaultKey(key)
+const setInitialSelectedKey = () => {
+  const selected = accountKeys.value.find((key) => key.selected)
+  if (selected && selected.key !== selectedKey.value) {
+    selectedKey.value = selected.key
+  }
 }
+
+// watch for changes from the store, like when a key is removed
+watch(
+  accountKeys,
+  () => {
+    setInitialSelectedKey()
+  },
+  { deep: true },
+)
+
+// watch for changes from the UI, when the user selects a key
+watch(selectedKey, (newKey) => {
+  store.setUserDefaultKey(newKey)
+})
 
 const confirmRemoveKey = (key: string) => {
   keyToRemove.value = key

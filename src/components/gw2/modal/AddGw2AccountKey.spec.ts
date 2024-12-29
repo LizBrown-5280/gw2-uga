@@ -2,7 +2,7 @@ import { mount, VueWrapper } from '@vue/test-utils'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import AddGw2AccountKey from '@/components/gw2/modal/AddGw2AccountKey.vue'
 import { createTestingPinia } from '@pinia/testing'
-import { useGw2AccountKeysStore } from '@/stores/gw2AccountKeys'
+import { useGw2AccountKeysStore } from '@/stores/gw2AccountKeysStore'
 
 describe('AddGw2AccountKey', () => {
   let wrapper: VueWrapper
@@ -31,7 +31,7 @@ describe('AddGw2AccountKey', () => {
     await wrapper.find('button').trigger('click')
 
     expect(store.isDuplicateKey).toHaveBeenCalledWith('duplicate-key')
-    expect(wrapper.find('.error-container').text()).toContain('The key provided is a duplicate.')
+    expect(wrapper.find('.error-container').text()).toContain('The key provided is already stored. Please provide another key.')
   })
 
   it('adds a new key and resets the input fields', async () => {
@@ -52,5 +52,20 @@ describe('AddGw2AccountKey', () => {
   it('limits the name length to 15 characters', async () => {
     await wrapper.find('#newAccountKeyName').setValue('This is a very long name')
     expect((wrapper.find('#newAccountKeyName').element as HTMLInputElement).value.length).toBe(15)
+  })
+
+  it('clears isDuplicateKey flag on key change', async () => {
+    const store = useGw2AccountKeysStore()
+    store.isDuplicateKey = vi.fn().mockReturnValue(true)
+
+    await wrapper.find('#newAccountKey').setValue('duplicate-key')
+    await wrapper.find('button').trigger('click')
+    expect(wrapper.find('.error-container').text()).toContain('The key provided is already stored. Please provide another key.')
+
+    store.isDuplicateKey = vi.fn().mockReturnValue(false)
+    await wrapper.find('#newAccountKey').setValue('new-key')
+    expect(wrapper.find('.error-container').text()).not.toContain(
+      'The key provided is already stored. Please provide another key.',
+    )
   })
 })
