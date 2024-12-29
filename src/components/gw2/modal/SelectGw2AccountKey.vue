@@ -1,3 +1,25 @@
+<template>
+  <section v-if="accountKeys.length">
+    <h3>Select Default GW2 Account Key</h3>
+    <ul class="sm-txt no-bullets">
+      <li v-for="key in accountKeys" :key="key.key">
+        <input type="radio" :id="key.key" :value="key.key" v-model="selectedKey" @change="setDefaultKey(key.key)" />
+        <label>{{ key.name }}: {{ key.key }}</label>
+        <button @click="confirmRemoveKey(key.key)"><IconCross /></button>
+        <span class="icon-wrapper" v-show="isValidKey"><IconCheck /></span>
+      </li>
+    </ul>
+  </section>
+
+  <ModalContainer v-if="showModal" @close="showModal = false">
+    <div class="modal-content">
+      <p>Are you sure you want to remove this key?</p>
+      <button @click="removeKey">Yes</button>
+      <button @click="showModal = false">No</button>
+    </div>
+  </ModalContainer>
+</template>
+
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
 import { useGw2AccountKeysStore } from '@/stores/gw2AccountKeys'
@@ -41,28 +63,6 @@ const removeKey = () => {
   showModal.value = false
 }
 </script>
-
-<template>
-  <section v-if="accountKeys.length">
-    <h3>Select Default GW2 Account Key</h3>
-    <ul class="sm-txt no-bullets">
-      <li v-for="key in accountKeys" :key="key.key">
-        <input type="radio" :id="key.key" :value="key.key" v-model="selectedKey" @change="setDefaultKey(key.key)" />
-        <label>{{ key.name }}: {{ key.key }}</label>
-        <button @click="confirmRemoveKey(key.key)"><IconCross /></button>
-        <span class="icon-wrapper" v-show="isValidKey"><IconCheck /></span>
-      </li>
-    </ul>
-  </section>
-
-  <ModalContainer v-if="showModal" @close="showModal = false">
-    <div class="modal-content">
-      <p>Are you sure you want to remove this key?</p>
-      <button @click="removeKey">Yes</button>
-      <button @click="showModal = false">No</button>
-    </div>
-  </ModalContainer>
-</template>
 
 <style scoped lang="scss">
 section {
