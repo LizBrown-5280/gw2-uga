@@ -1,36 +1,3 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-import { useGw2AccountKeysStore } from '@/stores/gw2AccountKeys'
-import type { IGw2AccountKey } from '@/interfaces/Gw2Interfaces'
-
-const store = useGw2AccountKeysStore()
-
-const newKey = ref<IGw2AccountKey>({
-  name: '',
-  key: '',
-})
-
-const isInvalidKey = ref(false)
-const isDuplicateKey = ref(false)
-
-const addKey = () => {
-  isDuplicateKey.value = store.isDuplicateKey(newKey.value.key)
-  if (isDuplicateKey.value) {
-    console.error('Duplicate key:', newKey.value.key)
-    return
-  }
-
-  store.addAccountKey(newKey.value)
-  newKey.value = { name: '', key: '' } // Reset the input fields
-}
-
-const limitNameLength = () => {
-  if (newKey.value.name.length > 15) {
-    newKey.value.name = newKey.value.name.slice(0, 15)
-  }
-}
-</script>
-
 <template>
   <section>
     <h3>Enter your API key</h3>
@@ -68,6 +35,39 @@ const limitNameLength = () => {
     </p>
   </section>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useGw2AccountKeysStore } from '@/stores/gw2AccountKeys'
+import type { IGw2AccountKey } from '@/interfaces/Gw2Interfaces'
+
+const store = useGw2AccountKeysStore()
+
+const newKey = ref<IGw2AccountKey>({
+  name: '',
+  key: '',
+})
+
+const isInvalidKey = ref(false)
+const isDuplicateKey = ref(false)
+
+const addKey = () => {
+  isDuplicateKey.value = store.isDuplicateKey(newKey.value.key)
+  if (isDuplicateKey.value) {
+    console.error('Duplicate key:', newKey.value.key)
+    return
+  }
+
+  store.addAccountKey(newKey.value)
+  newKey.value = { name: '', key: '' } // Reset the input fields
+}
+
+const limitNameLength = () => {
+  if (newKey.value.name.length > 15) {
+    newKey.value.name = newKey.value.name.slice(0, 15)
+  }
+}
+</script>
 
 <style scoped lang="scss">
 .modal-content {
