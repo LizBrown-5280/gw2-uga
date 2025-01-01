@@ -13,6 +13,15 @@
       <a href="https://www.guildwars2.com/en/path-of-fire/">
         <img src="@/assets/gw2/images/GW2-PoF_Texture_Centered_Trans.png" width="140" />
       </a>
+      <a href="https://www.guildwars2.com/en/end-of-dragons/">
+        <img src="@/assets/gw2/images/GW2-EoD_Texture_Trans.png" width="140" />
+      </a>
+      <a href="https://www.guildwars2.com/en/secrets-of-the-obscure/">
+        <img src="@/assets/gw2/images/GW2-Secrets_of_the_Obscure_logo.png" width="140" />
+      </a>
+      <a href="https://buy.guildwars2.com/en-us/janthir-wilds?tab=0">
+        <img src="@/assets/gw2/images/GW2-Janthir_Wilds_logo.png" width="140" />
+      </a>
     </div>
 
     <p>
@@ -40,8 +49,8 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 580px;
-  height: 115px;
+  width: 1080px;
+  height: 120px;
   margin: 0 auto 10px;
   background-color: var(--color-background-sand);
   border-radius: 5px;
